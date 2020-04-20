@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hello_package/flutterhellopackage.dart' show R_Asset, R_Widget;
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_hello_package/flutter_hello_package.dart' as Hello;
 
 void main() => runApp(MyApp());
 
@@ -45,44 +46,97 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  void _alertMessage(String message) {
+    showCupertinoDialog(
+        context: context,
+        builder: (context) {
+          return new CupertinoAlertDialog(
+            content: Text(
+              "$message",
+              textAlign: TextAlign.justify,
+            ),
+            actions: <Widget>[
+              CupertinoButton(
+                onPressed: () {
+                  Navigator.of(context).pop("点击了确定");
+                },
+                child: Text("确定"),
+              ),
+            ],
+          );
+        });
+  }
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  void _readTestJson() async {
+    var rawString = await Hello.R.text.test_json();
+    _alertMessage(rawString);
+  }
+
+  void _readTestYaml() async {
+    var rawString = await Hello.R.text.test_yaml();
+    _alertMessage(rawString);
   }
 
   @override
   Widget build(BuildContext context) {
-    var imageWidget1 = Image(
-      image: R_Asset.test_only_main_asset_1,
+    var nonImpliedImageWidget_1 = Image(
+      image: Hello.R.image.test_only_main_asset_1(),
       width: 100,
       height: 100,
     );
 
-    var imageWidget2 = Image(
-      image: R_Asset.test_png_variant_1,
+    var nonImpliedImageWidget_2 = Image(
+      image: Hello.R.image.test_png_variant_1(),
       width: 100,
       height: 100,
     );
 
-    var imageWidget3 = Image(
-      image: R_Asset.test_only_main_asset_2,
+    var impliedImageWidget_1 = Image(
+      image: Hello.R.image.test_only_main_asset_2(),
       width: 100,
       height: 100,
     );
 
-    var imageWidget4 = Image(
-      image: R_Asset.test_png_variant_2,
+    var impliedImageWidget_2 = Image(
+      image: Hello.R.image.test_png_variant_2(),
       width: 100,
       height: 100,
     );
+
+    var amiri_TextWidget = Text("test Amiri 字体",
+        textAlign: TextAlign.center,
+        style: TextStyle(
+            fontFamily: Hello.R.fontFamily.amiri,
+            package: Hello.R.package,
+            fontWeight: FontWeight.bold));
+
+    var baloo_Thambi_2_TextWidget = Text("test Baloo_Thambi_2 字体",
+        textAlign: TextAlign.center,
+        style: TextStyle(fontFamily: Hello.R.fontFamily.baloo_Thambi_2, package: Hello.R.package));
+
+    var liu_Jian_Mao_Cao_TextWidget = Text("test Liu_Jian_Mao_Cao 字体",
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontFamily: Hello.R.fontFamily.liu_Jian_Mao_Cao,
+          package: Hello.R.package,
+          fontStyle: FontStyle.normal,
+        ));
+
+    var dan_Zhai_Hang_Shu_Cai_TextWidget = Text("test Dan_Zhai_Hang_Shu_Cai 字体",
+        textAlign: TextAlign.center,
+        style: TextStyle(
+            fontFamily: Hello.R.fontFamily.dan_Zhai_Hang_Shu_Cai,
+            package: Hello.R.package,
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.w900));
+
+    var github_IconWidget = Icon(_YorkFishIconData.github, color: Colors.blue);
+    var newYork_IconWidget = Icon(_YorkFishIconData.newYork, color: Colors.red);
+    var fish_IconWidget = Icon(_YorkFishIconData.fish, color: Colors.blue);
+
+    var sun_IconWidget = Icon(_SkyIconData.sun, color: Colors.blue);
+    var moon_IconWidget = Icon(_SkyIconData.moon, color: Colors.red);
+    var stars_IconWidget = Icon(_SkyIconData.stars, color: Colors.blue);
 
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
@@ -117,28 +171,111 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'You have pushed the button this many times:',
+              "--- Test Image Resource ---",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontFamily: Hello.R.fontFamily.lobster,
+                  package: Hello.R.package,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w900),
+            ),
+            nonImpliedImageWidget_1,
+            nonImpliedImageWidget_2,
+            impliedImageWidget_1,
+            impliedImageWidget_2,
+            Text(
+              "--- Test Text Resource ---",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontFamily: Hello.R.fontFamily.lobster,
+                  package: Hello.R.package,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w900),
+            ),
+            CupertinoButton(
+              child: Text(
+                "read  test.json",
+              ),
+              onPressed: _readTestJson,
+            ),
+            CupertinoButton(
+              child: Text(
+                "read  test.yaml",
+              ),
+              onPressed: _readTestYaml,
             ),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
+              "--- Test Font Resource ---",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontFamily: Hello.R.fontFamily.pacifico,
+                  package: Hello.R.package,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w900),
             ),
-            imageWidget1,
-            imageWidget2,
-            imageWidget3,
-            imageWidget4,
-            R_Widget.test_only_main_asset_1(),
-            R_Widget.test_png_variant_1(),
-            R_Widget.test_only_main_asset_2(),
-            R_Widget.test_png_variant_2(),
+            amiri_TextWidget,
+            baloo_Thambi_2_TextWidget,
+            liu_Jian_Mao_Cao_TextWidget,
+            dan_Zhai_Hang_Shu_Cai_TextWidget,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[github_IconWidget, newYork_IconWidget, fish_IconWidget],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[sun_IconWidget, moon_IconWidget, stars_IconWidget],
+            ),
+            Text(
+              "--- Ending ---",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontFamily: Hello.R.fontFamily.pacifico,
+                  package: Hello.R.package,
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w900),
+            ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
+
+class _YorkFishIconData {
+  static String fontFamily = Hello.R.fontFamily.yorkFish_IconFont;
+  static String fontPackage = Hello.R.package;
+
+  // the unicode of icon see: lib/assets/fonts/YorkFish_IconFont/iconfont.json
+
+  // github
+  static IconData github =
+      IconData(0xe628, fontFamily: fontFamily, fontPackage: fontPackage, matchTextDirection: true);
+
+  // new york
+  static IconData newYork =
+      IconData(0xe648, fontFamily: fontFamily, fontPackage: fontPackage, matchTextDirection: true);
+
+  // fish
+  static IconData fish =
+      IconData(0xefd7, fontFamily: fontFamily, fontPackage: fontPackage, matchTextDirection: true);
+}
+
+class _SkyIconData {
+  static String fontFamily = Hello.R.fontFamily.sky_IconFont;
+  static String fontPackage = Hello.R.package;
+
+  // the unicode of icon see: assets/fonts/Sky_IconFont/iconfont.json
+
+  // sun
+  static IconData sun =
+      IconData(0xe659, fontFamily: fontFamily, fontPackage: fontPackage, matchTextDirection: true);
+
+  // moon
+  static IconData moon =
+      IconData(0xe6c3, fontFamily: fontFamily, fontPackage: fontPackage, matchTextDirection: true);
+
+  // stars
+  static IconData stars =
+      IconData(0xe63d, fontFamily: fontFamily, fontPackage: fontPackage, matchTextDirection: true);
 }
