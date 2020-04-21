@@ -1,4 +1,4 @@
-# flutterhellopackage
+# flutter_hello_package
 
 A new Flutter package.
 
