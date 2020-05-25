@@ -25,6 +25,11 @@ flutter:
   - packages/example/assets/images/test_only_main_asset_2.png
   - assets/texts/test.json
   - packages/example/assets/texts/test.yaml
+  - assets/htmls/test.html
+  - assets/htmls/test_html_asset_variant.png
+  - assets/htmls/test_html_main_asset.png
+  - packages/flutter_hello_package/assets/images/test_only_main_asset_2.png
+  - packages/flutter_hello_package/assets/texts/test.yaml
   fonts:
   - family: Amiri
     fonts:
