@@ -1,6 +1,7 @@
+import 'package:example/hello_package_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_hello_package/flutter_hello_package.dart' as Hello;
+import 'r.g.dart';
 
 void main() => runApp(MyApp());
 
@@ -67,66 +68,71 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
+  void _gotoHelloPackagePage() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+          builder: (context) => HelloPackagePage(title: 'Hello Package Page'),
+          settings: RouteSettings(name: "home", arguments: null)),
+    );
+  }
+
   void _readTestJson() async {
-    var rawString = await Hello.R.text.test_json();
+    var rawString = await R.text.test_json();
     _alertMessage(rawString);
   }
 
   void _readTestYaml() async {
-    var rawString = await Hello.R.text.test_yaml();
+    var rawString = await R.text.test_yaml();
     _alertMessage(rawString);
   }
 
   @override
   Widget build(BuildContext context) {
     var nonImpliedImageWidget_1 = Image(
-      image: Hello.R.image.test_only_main_asset_1(),
+      image: R.image.test_only_main_asset_1(),
       width: 100,
       height: 100,
     );
 
     var nonImpliedImageWidget_2 = Image(
-      image: Hello.R.image.test_png_variant_1(),
+      image: R.image.test_png_variant_1(),
       width: 100,
       height: 100,
     );
 
     var impliedImageWidget_1 = Image(
-      image: Hello.R.image.test_only_main_asset_2(),
+      image: R.image.test_only_main_asset_2(),
       width: 100,
       height: 100,
     );
 
     var impliedImageWidget_2 = Image(
-      image: Hello.R.image.test_png_variant_2(),
+      image: R.image.test_png_variant_2(),
       width: 100,
       height: 100,
     );
 
     var amiri_TextWidget = Text("test Amiri 字体",
         textAlign: TextAlign.center,
-        style: TextStyle(
-            fontFamily: Hello.R.fontFamily.amiri,
-            package: Hello.R.package,
-            fontWeight: FontWeight.bold));
+        style: TextStyle(fontFamily: R.fontFamily.amiri, fontWeight: FontWeight.bold));
 
     var baloo_Thambi_2_TextWidget = Text("test Baloo_Thambi_2 字体",
         textAlign: TextAlign.center,
-        style: TextStyle(fontFamily: Hello.R.fontFamily.baloo_Thambi_2, package: Hello.R.package));
+        style: TextStyle(
+          fontFamily: R.fontFamily.baloo_Thambi_2,
+        ));
 
     var liu_Jian_Mao_Cao_TextWidget = Text("test Liu_Jian_Mao_Cao 字体",
         textAlign: TextAlign.center,
         style: TextStyle(
-          fontFamily: Hello.R.fontFamily.liu_Jian_Mao_Cao,
-          package: Hello.R.package,
+          fontFamily: R.fontFamily.liu_Jian_Mao_Cao,
           fontStyle: FontStyle.normal,
         ));
 
     var dan_Zhai_Hang_Shu_Cai_TextWidget = Text("test Dan_Zhai_Hang_Shu_Cai 字体",
         textAlign: TextAlign.center,
         style: TextStyle(
-            fontFamily: Hello.R.fontFamily.dan_Zhai_Hang_Shu_Cai,
-            package: Hello.R.package,
+            fontFamily: R.fontFamily.dan_Zhai_Hang_Shu_Cai,
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w900));
 
@@ -137,7 +143,6 @@ class _MyHomePageState extends State<MyHomePage> {
     var sun_IconWidget = Icon(_SkyIconData.sun, color: Colors.blue);
     var moon_IconWidget = Icon(_SkyIconData.moon, color: Colors.red);
     var stars_IconWidget = Icon(_SkyIconData.stars, color: Colors.blue);
-
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -170,12 +175,18 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            CupertinoButton(
+              child: Text(
+                "goto HelloPackagePage",
+              ),
+              onPressed: _gotoHelloPackagePage,
+            ),
             Text(
               "--- Test Image Resource ---",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontFamily: Hello.R.fontFamily.lobster,
-                  package: Hello.R.package,
+                  fontFamily: R.fontFamily.lobster,
+                  package: null,
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w900),
             ),
@@ -187,8 +198,8 @@ class _MyHomePageState extends State<MyHomePage> {
               "--- Test Text Resource ---",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontFamily: Hello.R.fontFamily.lobster,
-                  package: Hello.R.package,
+                  fontFamily: R.fontFamily.lobster,
+                  package: null,
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w900),
             ),
@@ -208,8 +219,8 @@ class _MyHomePageState extends State<MyHomePage> {
               "--- Test Font Resource ---",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontFamily: Hello.R.fontFamily.pacifico,
-                  package: Hello.R.package,
+                  fontFamily: R.fontFamily.pacifico,
+                  package: null,
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w900),
             ),
@@ -229,8 +240,8 @@ class _MyHomePageState extends State<MyHomePage> {
               "--- Ending ---",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontFamily: Hello.R.fontFamily.pacifico,
-                  package: Hello.R.package,
+                  fontFamily: R.fontFamily.pacifico,
+                  package: null,
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w900),
             ),
@@ -243,39 +254,37 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class _YorkFishIconData {
-  static String fontFamily = Hello.R.fontFamily.yorkFish_IconFont;
-  static String fontPackage = Hello.R.package;
+  static String fontFamily = R.fontFamily.yorkFish_IconFont;
 
   // the unicode of icon see: lib/assets/fonts/YorkFish_IconFont/iconfont.json
 
   // github
   static IconData github =
-      IconData(0xe628, fontFamily: fontFamily, fontPackage: fontPackage, matchTextDirection: true);
+      IconData(0xe628, fontFamily: fontFamily, fontPackage: null, matchTextDirection: true);
 
   // new york
   static IconData newYork =
-      IconData(0xe648, fontFamily: fontFamily, fontPackage: fontPackage, matchTextDirection: true);
+      IconData(0xe648, fontFamily: fontFamily, fontPackage: null, matchTextDirection: true);
 
   // fish
   static IconData fish =
-      IconData(0xefd7, fontFamily: fontFamily, fontPackage: fontPackage, matchTextDirection: true);
+      IconData(0xefd7, fontFamily: fontFamily, fontPackage: null, matchTextDirection: true);
 }
 
 class _SkyIconData {
-  static String fontFamily = Hello.R.fontFamily.sky_IconFont;
-  static String fontPackage = Hello.R.package;
+  static String fontFamily = R.fontFamily.sky_IconFont;
 
   // the unicode of icon see: assets/fonts/Sky_IconFont/iconfont.json
 
   // sun
   static IconData sun =
-      IconData(0xe659, fontFamily: fontFamily, fontPackage: fontPackage, matchTextDirection: true);
+      IconData(0xe659, fontFamily: fontFamily, fontPackage: null, matchTextDirection: true);
 
   // moon
   static IconData moon =
-      IconData(0xe6c3, fontFamily: fontFamily, fontPackage: fontPackage, matchTextDirection: true);
+      IconData(0xe6c3, fontFamily: fontFamily, fontPackage: null, matchTextDirection: true);
 
   // stars
   static IconData stars =
-      IconData(0xe63d, fontFamily: fontFamily, fontPackage: fontPackage, matchTextDirection: true);
+      IconData(0xe63d, fontFamily: fontFamily, fontPackage: null, matchTextDirection: true);
 }
