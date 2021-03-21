@@ -9,7 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_hello_package/flutter_hello_package.dart' as Hello;
 
 class HelloPackagePage extends StatefulWidget {
-  HelloPackagePage({Key key, this.title}) : super(key: key);
+  HelloPackagePage({Key? key, required this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
